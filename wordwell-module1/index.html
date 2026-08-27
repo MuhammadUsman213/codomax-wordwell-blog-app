@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>WordWell — a quiet place to write</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<header class="site-header">
+  <a href="index.html" class="brand"><span class="brand-mark">¶</span>WordWell</a>
+  <nav class="nav-links">
+    <a href="index.html" class="active">Home</a>
+    <span data-auth-slot style="display:flex; gap:1.8rem; align-items:center;"></span>
+  </nav>
+</header>
+
+<main>
+  <section class="hero">
+    <span class="quote-mark">“</span>
+    <h1>A quiet place to think out loud.</h1>
+    <p>WordWell is a small blog for small ideas — write them down before you lose them, and let a few other people read along.</p>
+    <div class="hero-actions">
+      <a href="register.html" class="btn btn-primary">Start writing</a>
+      <a href="login.html" class="btn btn-ghost">I already have an account</a>
+    </div>
+  </section>
+
+  <div class="section-heading">
+    <h2 style="font-size:1.4rem; margin:0;">Recent entries</h2>
+    <span class="eyebrow" id="post-count"></span>
+  </div>
+
+  <div class="post-grid" id="post-grid"></div>
+</main>
+
+<footer class="site-footer">
+  <span>WordWell — built for the Codomax internship, Module 1</span>
+  <span>Frontend Development · Day 1–4</span>
+</footer>
+
+<script src="js/app.js"></script>
+<script>
+  const grid = document.getElementById("post-grid");
+  const posts = getAllPosts();
+  document.getElementById("post-count").textContent = posts.length + " post" + (posts.length === 1 ? "" : "s");
+
+  if (posts.length === 0) {
+    grid.innerHTML = `<div class="empty-state"><h3>Nothing here yet</h3><p>Be the first to write something.</p></div>`;
+  } else {
+    grid.innerHTML = posts.map(p => `
+      <article class="post-card">
+        <span class="post-date">${formatDate(p.date)}</span>
+        <h3>${p.title}</h3>
+        <p>${excerpt(p.body)}</p>
+        <span class="post-author">— ${p.author}</span>
+      </article>
+    `).join("");
+  }
+</script>
+</body>
+</html>
