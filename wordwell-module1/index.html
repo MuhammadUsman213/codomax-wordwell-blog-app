@@ -52,12 +52,12 @@
     grid.innerHTML = `<div class="empty-state"><h3>Nothing here yet</h3><p>Be the first to write something.</p></div>`;
   } else {
     grid.innerHTML = posts.map(p => `
-      <article class="post-card">
+      <a href="post.html?id=${p.id}" class="post-card" style="text-decoration:none; color:inherit;">
         <span class="post-date">${formatDate(p.date)}</span>
         <h3>${p.title}</h3>
         <p>${excerpt(p.body)}</p>
         <span class="post-author">— ${p.author}</span>
-      </article>
+      </a>
     `).join("");
   }
 </script>
